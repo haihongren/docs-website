@@ -1,6 +1,7 @@
 ---
 title: OpenAI integration
 metaDescription: "A lightweight tool to monitor your OpenAI workload."
+freshnessValidatedDate: 2023-03-15
 ---
 
 import modelperformancemonitoringOpenAIDashboard from 'images/model-performance-monitoring_screenshot-crop_openai-dashboard.webp'
@@ -13,13 +14,11 @@ With the fully customizable dashboard of New Relic, users can add additional met
 
 Overall, New Relic's GPT integration provides real-time metrics to help businesses optimize usage, reduce costs, and achieve better results.
 
-
 <img
   title="OpenAI dashboard"
   alt="OpenAI dashboard"
   src={modelperformancemonitoringOpenAIDashboard}
 />
-
 
 ## Installation [#installation]
 
@@ -43,7 +42,6 @@ os.environ["NEW_RELIC_LICENSE_KEY"] = "<license key>"
 ```
 
 `NEW_RELIC_LICENSE_KEY` can also be sent as a parameter at the `monitor.initialization()` call.
-
 
 ### Step 2. Modify your code [#modify-code]
 
@@ -85,7 +83,6 @@ os.environ["EVENT_CLIENT_HOST"] = "insights-collector.eu01.nr-data.net"
 ```
 
 `EVENT_CLIENT_HOST` can also be sent as a parameter at the `monitor.initialization()` call.
-
 
 ## Demonstration video [#demo-walthrough]
 

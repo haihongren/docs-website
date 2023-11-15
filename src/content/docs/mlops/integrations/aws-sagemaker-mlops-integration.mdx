@@ -1,6 +1,7 @@
 ---
 title: Amazon SageMaker integration
 metaDescription: "Send your machine learning model data from Amazon SageMaker to New Relic to understand your model's performance."
+freshnessValidatedDate: never
 ---
 
 import modelperformancemonitoringAmazonSagemakerDashboard from 'images/model-performance-monitoring_screenshot-crop_amazon-sagemaker-dashboard.webp'
@@ -25,9 +26,8 @@ Start benefiting from New Relic [model performance monitoring](/docs/alerts-appl
 <Callout variant="important">
   Each metric sent to CloudWatch is automatically sent to New Relic's metric table in NRDB, according to the namespace filter. You can always query them using NRQL:
 
-  ```
-  FROM Metric SELECT *  WHERE aws.Namespace='/aws/sagemaker/Endpoints'  LIMIT MAX SINCE 1 WEEK AGO
-  ```
+    FROM Metric SELECT *  WHERE aws.Namespace='/aws/sagemaker/Endpoints'  LIMIT MAX SINCE 1 WEEK AGO
+
 </Callout>
 
 ### Manual option [#set-up-manual]
@@ -38,23 +38,21 @@ Follow our docs to set up [CloudWatch Metric Streams](/docs/integrations/amazon-
 
 You may automate the setup with the [Terraform code](https://github.com/newrelic-experimental/terraform-cloudwatch-metric-streams):
 
-```
-module "example_usage" {
-  source = "modules/nr-cloudwatch-metric-stream"
+    module "example_usage" {
+      source = "modules/nr-cloudwatch-metric-stream"
 
-  name_suffix = "suffix" # optional
-  aws_account_id = "your-aws-account-id"
+      name_suffix = "suffix" # optional
+      aws_account_id = "your-aws-account-id"
 
-  newrelic_collector_endpoint = "newrelic-endpoint-url"
-  newrelic_trusted_account_id = "12345678"
-  newrelic_license_key        = "[your-newrelic-license-key](/docs/apis/intro-apis/new-relic-api-keys/#ingest-license-key)"
-}
-```
+      newrelic_collector_endpoint = "newrelic-endpoint-url"
+      newrelic_trusted_account_id = "12345678"
+      newrelic_license_key        = "[your-newrelic-license-key](/docs/apis/intro-apis/new-relic-api-keys/#ingest-license-key)"
+    }
 
 When calling the module, please write the correct `newrelic_collector_endpoint`:
 
-* HTTP endpoint URL - US datacenter: `https://aws-api.newrelic.com/cloudwatch-metrics/v1`
-* HTTP endpoint URL - EU datacenter: `https://aws-api.eu01.nr-data.net/cloudwatch-metrics/v1`
+-   HTTP endpoint URL - US datacenter: `https://aws-api.newrelic.com/cloudwatch-metrics/v1`
+-   HTTP endpoint URL - EU datacenter: `https://aws-api.eu01.nr-data.net/cloudwatch-metrics/v1`
 
 When you set the metric stream you can choose to stream the metric from all the namespaces, or you can specify namespaces.
 
@@ -70,18 +68,18 @@ To obtain more benefits from the Amazon SageMaker integration, use the Amazon Sa
 
 The **[Amazon SageMaker Model Monitor](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html)** provides the following types of monitoring:
 
-* [Monitor Data Quality](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-quality.html): Monitor drift in data quality.
-  * Example notebook: [Amazon SageMaker Model Monitor](https://sagemaker-examples.readthedocs.io/en/latest/sagemaker_model_monitor/introduction/SageMaker-ModelMonitoring.html)
-  * Namespace: `aws/sagemaker/Endpoints/data-metrics`
-* [Monitor Model Quality](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality.html): Monitor drift in model quality metrics, such as accuracy.
-  * Example notebook: [Amazon SageMaker Model Quality Monitor](https://sagemaker-examples.readthedocs.io/en/latest/sagemaker_model_monitor/model_quality/model_quality_churn_sdk.html)
-  * Namespace: `aws/sagemaker/Endpoints/model-metrics`
-* [Monitor Bias Drift for Models in Production](https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-monitor-bias-drift.html): Monitor bias in you model's predictions.
-  * Example notebook: [Monitoring bias drift and feature attribution drift Amazon SageMaker Clarify](https://sagemaker-examples.readthedocs.io/en/latest/sagemaker_model_monitor/fairness_and_explainability/SageMaker-Model-Monitor-Fairness-and-Explainability.html)
-  * Namespace: `aws/sagemaker/Endpoints/bias-metrics`
-* [Monitor Feature Attribution Drift for Models in Production](https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-monitor-feature-attribution-drift.html): Monitor drift in feature attribution.
-  * Example notebook: [Monitoring bias drift and feature attribution drift Amazon SageMaker Clarify](https://sagemaker-examples.readthedocs.io/en/latest/sagemaker_model_monitor/fairness_and_explainability/SageMaker-Model-Monitor-Fairness-and-Explainability.html)
-  * Namespace: `aws/sagemaker/Endpoints/explainability-metrics`
+-   [Monitor Data Quality](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-quality.html): Monitor drift in data quality.
+    -   Example notebook: [Amazon SageMaker Model Monitor](https://sagemaker-examples.readthedocs.io/en/latest/sagemaker_model_monitor/introduction/SageMaker-ModelMonitoring.html)
+    -   Namespace: `aws/sagemaker/Endpoints/data-metrics`
+-   [Monitor Model Quality](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality.html): Monitor drift in model quality metrics, such as accuracy.
+    -   Example notebook: [Amazon SageMaker Model Quality Monitor](https://sagemaker-examples.readthedocs.io/en/latest/sagemaker_model_monitor/model_quality/model_quality_churn_sdk.html)
+    -   Namespace: `aws/sagemaker/Endpoints/model-metrics`
+-   [Monitor Bias Drift for Models in Production](https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-monitor-bias-drift.html): Monitor bias in you model's predictions.
+    -   Example notebook: [Monitoring bias drift and feature attribution drift Amazon SageMaker Clarify](https://sagemaker-examples.readthedocs.io/en/latest/sagemaker_model_monitor/fairness_and_explainability/SageMaker-Model-Monitor-Fairness-and-Explainability.html)
+    -   Namespace: `aws/sagemaker/Endpoints/bias-metrics`
+-   [Monitor Feature Attribution Drift for Models in Production](https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-monitor-feature-attribution-drift.html): Monitor drift in feature attribution.
+    -   Example notebook: [Monitoring bias drift and feature attribution drift Amazon SageMaker Clarify](https://sagemaker-examples.readthedocs.io/en/latest/sagemaker_model_monitor/fairness_and_explainability/SageMaker-Model-Monitor-Fairness-and-Explainability.html)
+    -   Namespace: `aws/sagemaker/Endpoints/explainability-metrics`
 
 <InstallFeedback />
 
@@ -106,6 +104,7 @@ We generate `aws-entities` (under the MLOps entity domain) for the detailed name
         Namespace
       </th>
     </tr>
+
   </thead>
 
   <tbody>
@@ -138,12 +137,13 @@ We generate `aws-entities` (under the MLOps entity domain) for the detailed name
         `aws/sagemaker/Endpoints/model-metrics`, `aws/sagemaker/Endpoints/explainability-metrics`
       </td>
     </tr>
+
   </tbody>
 </table>
 
 Go to **[one.newrelic.com > All capabilities](https://one.newrelic.com/all-capabilities) > Model performance** to view:
 
-* The dashboard for the metrics of the endpoint from one of the Amazon SageMaker entities
+-   The dashboard for the metrics of the endpoint from one of the Amazon SageMaker entities
 
 <img
   title="Dashboard for the for the machine learning endpoint"
@@ -151,7 +151,7 @@ Go to **[one.newrelic.com > All capabilities](https://one.newrelic.com/all-capab
   src={modelperformancemonitoringAmazonSagemakerDashboard}
 />
 
-* The dashboard for the model data entity
+-   The dashboard for the model data entity
 
 <img
   title="Dashboard for the model data entity.png"
